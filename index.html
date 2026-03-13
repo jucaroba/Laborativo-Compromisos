@@ -31,30 +31,30 @@
 
     /* SCREEN */
     #sv{height:100vh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
-    #sh{display:flex;align-items:center;gap:1rem;padding:.6rem 1rem;background:#fff;border-bottom:1px solid #E4E4E7}
-    #sleft{display:flex;flex-direction:column;gap:.15rem;min-width:100px}
-    #slogo2{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#A1A1AA;font-weight:600}
+    #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 1.2rem;background:#4CAF50;border-bottom:none}
+    #sleft{display:flex;flex-direction:column;gap:.15rem;min-width:110px}
+    #slogo2{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
     #spc{display:flex;align-items:baseline;gap:.3rem}
-    #spn{font-size:2.4rem;font-weight:800;color:#18181B;line-height:1}
-    #spl{font-size:.72rem;color:#71717A}
-    #sq{flex:1;font-size:1.15rem;font-weight:700;color:#18181B;text-align:center;line-height:1.4;padding:0 1rem}
+    #spn{font-size:3rem;font-weight:800;color:#fff;line-height:1}
+    #spl{font-size:.9rem;color:rgba(255,255,255,.75)}
+    #sq{flex:1;font-size:1.4rem;font-weight:700;color:#fff;text-align:center;line-height:1.4;padding:0 1rem}
     #sqrbox{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:100px}
-    #qrwrap{background:#F4F4F5;border-radius:8px;padding:6px;border:1px solid #E4E4E7}
+    #qrwrap{background:rgba(255,255,255,.15);border-radius:8px;padding:6px;border:1px solid rgba(255,255,255,.3)}
     #qrwrap canvas{display:block;border-radius:3px}
-    #qrlabel{font-size:.58rem;color:#A1A1AA;letter-spacing:.05em;text-align:center}
+    #qrlabel{font-size:.68rem;color:rgba(255,255,255,.7);letter-spacing:.05em;text-align:center}
     #sgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:.55rem;padding:.65rem .9rem;overflow:hidden;background:#F4F4F5}
     .cs{background:#fff;border:1px solid #E4E4E7;border-radius:10px;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-    .ch{display:flex;align-items:center;gap:.35rem;padding:.35rem .55rem;border-bottom:2px solid var(--cc);flex-shrink:0;background:color-mix(in srgb, var(--cc) 8%, transparent)}
-    .cn{font-size:.68rem;font-weight:600;color:var(--cc);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .ck{font-size:.62rem;font-weight:700;color:var(--cc);background:rgba(0,0,0,.05);border-radius:20px;padding:.1rem .4rem;flex-shrink:0}
-    .cl{flex:1;padding:.35rem .45rem;display:flex;flex-direction:column;gap:.3rem;overflow:hidden;min-height:0}
-    .card{border-left:3px solid var(--cc);background:color-mix(in srgb, var(--cc) 5%, transparent);border-radius:0 6px 6px 0;padding:.3rem .45rem;transition:transform .4s ease,opacity .4s ease}
+    .ch{display:flex;align-items:center;gap:.35rem;padding:.4rem .6rem;border-bottom:2px solid var(--cc);flex-shrink:0;background:color-mix(in srgb, var(--cc) 8%, transparent)}
+    .cn{font-size:.82rem;font-weight:600;color:var(--cc);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ck{font-size:.75rem;font-weight:700;color:var(--cc);background:rgba(0,0,0,.05);border-radius:20px;padding:.15rem .45rem;flex-shrink:0}
+    .cl{flex:1;padding:.4rem .5rem;display:flex;flex-direction:column;gap:.35rem;overflow:hidden;min-height:0}
+    .card{border-left:3px solid var(--cc);background:color-mix(in srgb, var(--cc) 5%, transparent);border-radius:0 6px 6px 0;padding:.35rem .5rem;transition:transform .4s ease,opacity .4s ease}
     .card.enter{transform:translateX(-10px);opacity:0}
-    .cr{font-size:.72rem;color:#27272A;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .cname{font-size:.6rem;color:#A1A1AA;margin-top:.15rem}
-    .empty{font-size:.62rem;color:#D4D4D8;text-align:center;margin:auto;padding:.5rem}
+    .cr{font-size:.88rem;color:#27272A;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .cname{font-size:.74rem;color:#A1A1AA;margin-top:.15rem}
+    .empty{font-size:.78rem;color:#D4D4D8;text-align:center;margin:auto;padding:.5rem}
     #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;background:#fff;border-top:1px solid #E4E4E7}
-    #rbtn{background:transparent;border:1px solid #E4E4E7;color:#A1A1AA;border-radius:6px;padding:.2rem .65rem;font-size:.65rem;cursor:pointer;transition:color .2s,border-color .2s}
+    #rbtn{background:transparent;border:1px solid #E4E4E7;color:#A1A1AA;border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;transition:color .2s,border-color .2s}
     #rbtn:hover{color:#EF4444;border-color:#EF4444}
   </style>
 </head>
@@ -70,14 +70,14 @@ const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 
 const QUESTION = '¿A qué te comprometes para ganar como equipo?';
 const CATS = [
-  {id:1, name:'Comunicación',           color:'#60A5FA', icon:'💬'},
-  {id:2, name:'Confianza',              color:'#A78BFA', icon:'🤝'},
-  {id:3, name:'Responsabilidad',        color:'#FB923C', icon:'🎯'},
-  {id:4, name:'Colaboración',           color:'#34D399', icon:'🌿'},
-  {id:5, name:'Visión compartida',      color:'#2DD4BF', icon:'🔭'},
-  {id:6, name:'Desarrollo del equipo',  color:'#FBBF24', icon:'📈'},
-  {id:7, name:'Gestión del conflicto',  color:'#F87171', icon:'⚖️'},
-  {id:8, name:'Reconocimiento y bienestar', color:'#F472B6', icon:'✨'},
+  {id:1, name:'Comunicación',           color:'#4CAF50', icon:'💬'},
+  {id:2, name:'Confianza',              color:'#388E3C', icon:'🤝'},
+  {id:3, name:'Responsabilidad',        color:'#66BB6A', icon:'🎯'},
+  {id:4, name:'Colaboración',           color:'#2E7D32', icon:'🌿'},
+  {id:5, name:'Visión compartida',      color:'#43A047', icon:'🔭'},
+  {id:6, name:'Desarrollo del equipo',  color:'#558B2F', icon:'📈'},
+  {id:7, name:'Gestión del conflicto',  color:'#81C784', icon:'⚖️'},
+  {id:8, name:'Reconocimiento y bienestar', color:'#33691E', icon:'✨'},
 ];
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
@@ -170,7 +170,7 @@ async function initScreen() {
 
   new QRCode(document.getElementById('qrwrap'), {
     text: formUrl, width:90, height:90,
-    colorDark:'#18181B', colorLight:'#F4F4F5'
+    colorDark:'#1B5E20', colorLight:'rgba(255,255,255,.9)'
   });
 
   // Carga inicial
