@@ -108,8 +108,8 @@ async function initForm() {
         </div>
         <div class="fg">
           <label>Tu compromiso</label>
-          <textarea id="ri" rows="4" maxlength="220" placeholder="Escribe tu compromiso con el equipo..."></textarea>
-          <span id="charcnt">0 / 220</span>
+          <textarea id="ri" rows="4" maxlength="150" placeholder="Escribe tu compromiso con el equipo..."></textarea>
+          <span id="charcnt">0 / 150</span>
         </div>
         <button id="sb" onclick="handleSubmit()">Enviar compromiso →</button>
         <p id="ffoot">una experiencia laborativo.</p>
@@ -122,7 +122,7 @@ async function initForm() {
     </div></div>`;
 
   document.getElementById('ri').oninput = function(){
-    document.getElementById('charcnt').textContent = `${this.value.length} / 220`;
+    document.getElementById('charcnt').textContent = `${this.value.length} / 150`;
   };
 }
 
