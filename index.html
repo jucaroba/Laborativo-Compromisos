@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compromisos de Equipo — Laborativo</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,sans-serif;background:#060912;color:#fff}
+
+    /* FORM */
+    #fv{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:linear-gradient(160deg,#080c18,#0f1730);overflow-y:auto}
+    #fc{width:100%;max-width:460px;background:#0d1427;border:1px solid #1a2845;border-radius:18px;padding:2rem}
+    #flogo{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#3a4a6a;margin-bottom:.2rem}
+    #ftag{font-size:.78rem;color:#2a3a5a;margin-bottom:1.5rem}
+    #fq{font-size:1.1rem;font-weight:700;color:#c8d8ff;line-height:1.5;margin-bottom:1.75rem;padding-bottom:1.5rem;border-bottom:1px solid #1a2845}
+    .fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
+    .fg label{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#4a5a7a}
+    .fg input,.fg textarea{background:#111827;border:1.5px solid #1e2d50;border-radius:10px;padding:.75rem 1rem;color:#ddeaff;font-size:.95rem;font-family:inherit;resize:none;outline:none;transition:border .2s}
+    .fg input:focus,.fg textarea:focus{border-color:#4a7aff}
+    #charcnt{font-size:.68rem;color:#2a3a5a;text-align:right;margin-top:.2rem}
+    #sb{width:100%;padding:.9rem;background:linear-gradient(135deg,#2a57f0,#7c3aed);border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:opacity .2s;margin-top:.3rem}
+    #sb:disabled{opacity:.5;cursor:default}
+    #success{display:none;flex-direction:column;align-items:center;text-align:center;gap:.75rem;padding:1.5rem 0}
+    #sicon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#16a34a);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
+    #success h3{color:#ddeaff;font-size:1.1rem}
+    #success p{color:#4a5a7a;font-size:.88rem}
+
+    /* SCREEN */
+    #sv{height:100vh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
+    #sh{display:flex;align-items:center;gap:1rem;padding:.6rem 1rem;background:#080d1c;border-bottom:1px solid #111e38}
+    #sleft{display:flex;flex-direction:column;gap:.15rem;min-width:100px}
+    #slogo2{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#2a3a5a}
+    #spc{display:flex;align-items:baseline;gap:.3rem}
+    #spn{font-size:2.4rem;font-weight:800;color:#e0ecff;line-height:1}
+    #spl{font-size:.72rem;color:#3a4a6a}
+    #sq{flex:1;font-size:1.15rem;font-weight:700;color:#c0d4ff;text-align:center;line-height:1.4;padding:0 1rem}
+    #sqrbox{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:100px}
+    #qrwrap{background:#0f1830;border-radius:8px;padding:6px}
+    #qrwrap canvas{display:block;border-radius:3px}
+    #qrlabel{font-size:.58rem;color:#2a3a5a;letter-spacing:.05em;text-align:center}
+    #sgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:.55rem;padding:.65rem .9rem;overflow:hidden}
+    .cs{background:#0b0f1e;border:1px solid #111e38;border-radius:10px;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+    .ch{display:flex;align-items:center;gap:.35rem;padding:.35rem .55rem;border-bottom:2px solid var(--cc);flex-shrink:0;background:color-mix(in srgb, var(--cc) 6%, transparent)}
+    .cn{font-size:.68rem;font-weight:600;color:var(--cc);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ck{font-size:.62rem;font-weight:700;color:var(--cc);background:rgba(255,255,255,.05);border-radius:20px;padding:.1rem .4rem;flex-shrink:0}
+    .cl{flex:1;padding:.35rem .45rem;display:flex;flex-direction:column;gap:.3rem;overflow:hidden;min-height:0}
+    .card{border-left:3px solid var(--cc);background:rgba(255,255,255,.025);border-radius:0 6px 6px 0;padding:.3rem .45rem;transition:transform .4s ease,opacity .4s ease}
+    .card.enter{transform:translateX(-10px);opacity:0}
+    .cr{font-size:.72rem;color:#c8d8ff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .cname{font-size:.6rem;color:#3a4a6a;margin-top:.15rem}
+    .empty{font-size:.62rem;color:#1a2a40;text-align:center;margin:auto;padding:.5rem}
+    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;background:#060912}
+    #rbtn{background:transparent;border:1px solid #111e38;color:#2a3a5a;border-radius:6px;padding:.2rem .65rem;font-size:.65rem;cursor:pointer;transition:color .2s,border-color .2s}
+    #rbtn:hover{color:#f87171;border-color:#f87171}
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// ─────────────────────────────────────────
+// CONFIGURACIÓN — edita estos 2 valores
+// ─────────────────────────────────────────
+const SUPABASE_URL  = 'https://vnyzgbzqwqorimssuxza.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZueXpnYnpxd3Fvcmltc3N1eHphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTY2MTgsImV4cCI6MjA4ODkzMjYxOH0.sjRR89kZb8Dk5Dtuj4xmntlC2KX9IDzIeMwGBGvLUF8';
+// ─────────────────────────────────────────
+
+const QUESTION = '¿A qué te comprometes para ganar como equipo?';
+const CATS = [
+  {id:1, name:'Comunicación',           color:'#60A5FA', icon:'💬'},
+  {id:2, name:'Confianza',              color:'#A78BFA', icon:'🤝'},
+  {id:3, name:'Responsabilidad',        color:'#FB923C', icon:'🎯'},
+  {id:4, name:'Colaboración',           color:'#34D399', icon:'🌿'},
+  {id:5, name:'Visión compartida',      color:'#2DD4BF', icon:'🔭'},
+  {id:6, name:'Desarrollo del equipo',  color:'#FBBF24', icon:'📈'},
+  {id:7, name:'Gestión del conflicto',  color:'#F87171', icon:'⚖️'},
+  {id:8, name:'Reconocimiento y bienestar', color:'#F472B6', icon:'✨'},
+];
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+const isForm = new URLSearchParams(location.search).get('view') === 'form';
+isForm ? initForm() : initScreen();
+
+// ══ FORMULARIO ══════════════════════════
+function initForm() {
+  document.getElementById('root').innerHTML = `
+    <div id="fv"><div id="fc">
+      <p id="flogo">laborativo</p>
+      <p id="ftag">Dinámica de equipo</p>
+      <h2 id="fq">${QUESTION}</h2>
+      <div id="ff">
+        <div class="fg">
+          <label>Tu nombre</label>
+          <input id="ni" type="text" placeholder="Ej: Camilo Restrepo" maxlength="60" autocomplete="off">
+        </div>
+        <div class="fg">
+          <label>Tu compromiso</label>
+          <textarea id="ri" rows="4" maxlength="220" placeholder="Escribe tu compromiso con el equipo..."></textarea>
+          <span id="charcnt">0 / 220</span>
+        </div>
+        <button id="sb" onclick="handleSubmit()">Enviar compromiso →</button>
+      </div>
+      <div id="success">
+        <div id="sicon">✓</div>
+        <h3>¡Compromiso registrado!</h3>
+        <p>Tu respuesta ya aparece en la pantalla del salón</p>
+      </div>
+    </div></div>`;
+  document.getElementById('ri').oninput = function(){
+    document.getElementById('charcnt').textContent = `${this.value.length} / 220`;
+  };
+}
+
+async function handleSubmit() {
+  const name = document.getElementById('ni').value.trim();
+  const resp = document.getElementById('ri').value.trim();
+  if (!name) { alert('Por favor escribe tu nombre'); return; }
+  if (!resp)  { alert('Por favor escribe tu compromiso'); return; }
+
+  const btn = document.getElementById('sb');
+  btn.textContent = '⏳ Enviando...'; btn.disabled = true;
+
+  let catId = 1;
+  try {
+    const r = await fetch('/api/classify', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ text: resp })
+    });
+    const d = await r.json();
+    catId = d.catId || 1;
+  } catch(e) { catId = Math.ceil(Math.random()*8); }
+
+  await sb.from('commitments').insert({ name, response: resp, category_id: catId });
+
+  document.getElementById('ff').style.display = 'none';
+  document.getElementById('success').style.display = 'flex';
+}
+
+// ══ PANTALLA PRESENTADOR ════════════════
+const seen = new Set();
+
+async function initScreen() {
+  const formUrl = location.origin + location.pathname + '?view=form';
+  document.getElementById('root').innerHTML = `
+    <div id="sv">
+      <header id="sh">
+        <div id="sleft">
+          <span id="slogo2">laborativo</span>
+          <div id="spc"><span id="spn">0</span><span id="spl">&nbsp;participantes</span></div>
+        </div>
+        <h1 id="sq">${QUESTION}</h1>
+        <div id="sqrbox">
+          <div id="qrwrap"></div>
+          <p id="qrlabel">Escanea para participar</p>
+        </div>
+      </header>
+      <div id="sgrid">
+        ${CATS.map(c=>`
+          <div class="cs" style="--cc:${c.color}">
+            <div class="ch"><span>${c.icon}</span><span class="cn">${c.name}</span><span class="ck" id="ck${c.id}">0</span></div>
+            <div class="cl" id="cl${c.id}"><p class="empty">—</p></div>
+          </div>`).join('')}
+      </div>
+      <div id="rbar"><button id="rbtn" onclick="resetAll()">🗑 Limpiar respuestas</button></div>
+    </div>`;
+
+  new QRCode(document.getElementById('qrwrap'), {
+    text: formUrl, width:90, height:90,
+    colorDark:'#c8d8ff', colorLight:'#0f1830'
+  });
+
+  // Carga inicial
+  const { data } = await sb.from('commitments').select('*').order('created_at', {ascending:true});
+  (data||[]).forEach(r => addCard(r));
+  updateCount(data?.length || 0);
+
+  // Tiempo real
+  sb.channel('commitments')
+    .on('postgres_changes', {event:'INSERT', schema:'public', table:'commitments'}, p => {
+      addCard(p.new);
+    })
+    .subscribe();
+}
+
+function addCard(r) {
+  if (seen.has(r.id)) return;
+  seen.add(r.id);
+  const cat = CATS.find(c=>c.id===r.category_id)||CATS[0];
+  const list = document.getElementById(`cl${r.category_id}`);
+  if (!list) return;
+  list.querySelector('.empty')?.remove();
+  const el = document.createElement('div');
+  el.className = 'card enter';
+  el.style.setProperty('--cc', cat.color);
+  el.innerHTML = `<p class="cr">${esc(r.response)}</p><p class="cname">${esc(r.name)}</p>`;
+  list.prepend(el);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('enter')));
+  while(list.children.length > 4) list.removeChild(list.lastChild);
+  const cnt = document.getElementById(`ck${r.category_id}`);
+  cnt.textContent = parseInt(cnt.textContent||0)+1;
+  updateCount(seen.size);
+}
+
+function updateCount(n) { document.getElementById('spn').textContent = n; }
+
+async function resetAll() {
+  if (!confirm('¿Limpiar todas las respuestas? Esta acción no se puede deshacer.')) return;
+  await sb.from('commitments').delete().neq('id','00000000-0000-0000-0000-000000000000');
+  seen.clear();
+  CATS.forEach(c=>{
+    const list = document.getElementById(`cl${c.id}`);
+    list.innerHTML='<p class="empty">—</p>';
+    document.getElementById(`ck${c.id}`).textContent='0';
+  });
+  updateCount(0);
+}
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+</script>
+</body>
+</html>
