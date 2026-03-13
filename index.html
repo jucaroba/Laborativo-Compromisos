@@ -14,9 +14,8 @@
     /* FORM */
     #fv{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#F4F4F5;overflow-y:auto}
     #fc{width:100%;max-width:460px;background:#fff;border:1px solid #E4E4E7;border-radius:16px;padding:2rem;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-    #flogo{margin-bottom:1.2rem}
-    #flogo img{height:34px;display:block;margin-left:-15px}
     #ftag{font-size:.78rem;color:#A1A1AA;margin-bottom:1.5rem}
+    #ffoot{font-size:.72rem;color:#A1A1AA;text-align:center;margin-top:1.2rem}
     #fq{font-size:1.1rem;font-weight:700;color:#18181B;line-height:1.5;margin-bottom:1.75rem;padding-bottom:1.5rem;border-bottom:1px solid #E4E4E7}
     .fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
     .fg label{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#71717A;font-weight:600}
@@ -95,8 +94,6 @@ async function initForm() {
 
   document.getElementById('root').innerHTML = `
     <div id="fv"><div id="fc">
-      <p id="flogo"><img src="/logo.png" alt="laborativo"></p>
-      <p id="ftag">Dinámica de equipo</p>
       <h2 id="fq">${QUESTION}</h2>
       <div id="ff">
         <div class="fg">
@@ -115,6 +112,7 @@ async function initForm() {
           <span id="charcnt">0 / 220</span>
         </div>
         <button id="sb" onclick="handleSubmit()">Enviar compromiso →</button>
+        <p id="ffoot">una experiencia laborativo.</p>
       </div>
       <div id="success">
         <div id="sicon">✓</div>
