@@ -47,14 +47,15 @@
     #qrwrap{border-radius:6px;overflow:hidden}
     #qrwrap canvas{display:block;border-radius:3px}
     #qrlabel{font-size:1rem;color:#fff;text-align:center}
-    #sgrid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);align-items:start;gap:.65rem;padding:.75rem 1rem;overflow-y:auto;background:#F4F4F5}
-    .cs{background:#fff;border:1px solid #E4E4E7;border-radius:10px;display:flex;flex-direction:column}
-    .ch{display:flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border-bottom:2px solid #4CAF50;background:color-mix(in srgb, #4CAF50 8%, transparent);border-radius:10px 10px 0 0}
+    #sgrid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);align-items:start;gap:0;padding:.75rem 0;overflow-y:auto;background:#F4F4F5;position:relative}
+    #sgrid::before{content:'';position:absolute;left:50%;top:.75rem;bottom:.75rem;border-left:2px dashed #B0BEC5;pointer-events:none}
+    .cs{background:transparent;border:none;display:flex;flex-direction:column;padding:0 1rem}
+    .ch{display:flex;align-items:center;gap:.5rem;padding:.3rem .1rem .5rem;margin-bottom:.3rem}
     .cn{font-size:1.64rem;font-weight:600;color:#4CAF50;flex:1;outline:none;cursor:text;border-radius:4px;padding:2px 4px;transition:background .15s}
     .cn:hover{background:rgba(76,175,80,.12)}
     .cn:focus{background:rgba(76,175,80,.18)}
-    .ck{font-size:1.3rem;font-weight:700;color:#4CAF50;background:rgba(0,0,0,.05);border-radius:20px;padding:.15rem .55rem;flex-shrink:0}
-    .cl{padding:.5rem .6rem;columns:3;column-gap:.5rem}
+    .ck{font-size:1.3rem;font-weight:700;color:#4CAF50;background:rgba(76,175,80,.1);border-radius:20px;padding:.15rem .55rem;flex-shrink:0}
+    .cl{padding:0;columns:3;column-gap:.5rem}
     .card{break-inside:avoid;margin-bottom:.5rem;background:#fff;border:1px solid #E8F5E9;border-top:3px solid #4CAF50;border-radius:8px;padding:.5rem .7rem;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:transform .4s ease,opacity .4s ease;display:block}
     .card.enter{transform:translateY(-8px);opacity:0}
     .cr{font-size:1rem;color:#1C1C1E;line-height:1.45}
