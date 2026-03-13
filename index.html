@@ -31,8 +31,8 @@
     #success p{color:#71717A;font-size:.88rem}
 
     /* SCREEN */
-    #sv{height:100vh;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden}
-    #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 1.2rem;background:#4CAF50;border-bottom:none}
+    #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
+    #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 1.2rem;background:#4CAF50;flex-shrink:0}
     #sleft{display:flex;flex-direction:column;gap:.15rem;min-width:110px}
     #slogo2{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
     #spc{display:flex;align-items:baseline;gap:.3rem}
@@ -43,18 +43,20 @@
     #qrwrap{background:rgba(255,255,255,.15);border-radius:8px;padding:6px;border:1px solid rgba(255,255,255,.3)}
     #qrwrap canvas{display:block;border-radius:3px}
     #qrlabel{font-size:.68rem;color:rgba(255,255,255,.7);letter-spacing:.05em;text-align:center}
-    #sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem;padding:.75rem 1rem;overflow:hidden;background:#F4F4F5}
-    .cs{background:#fff;border:1px solid #E4E4E7;border-radius:10px;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-    .ch{display:flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border-bottom:2px solid #4CAF50;flex-shrink:0;background:color-mix(in srgb, #4CAF50 8%, transparent)}
-    .cn{font-size:1.64rem;font-weight:600;color:#4CAF50;flex:1}
+    #sgrid{flex:1;display:grid;grid-template-columns:repeat(2,1fr);align-items:start;gap:.65rem;padding:.75rem 1rem;overflow-y:auto;background:#F4F4F5}
+    .cs{background:#fff;border:1px solid #E4E4E7;border-radius:10px;display:flex;flex-direction:column}
+    .ch{display:flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border-bottom:2px solid #4CAF50;background:color-mix(in srgb, #4CAF50 8%, transparent);border-radius:10px 10px 0 0}
+    .cn{font-size:1.64rem;font-weight:600;color:#4CAF50;flex:1;outline:none;cursor:text;border-radius:4px;padding:2px 4px;transition:background .15s}
+    .cn:hover{background:rgba(76,175,80,.12)}
+    .cn:focus{background:rgba(76,175,80,.18)}
     .ck{font-size:1.3rem;font-weight:700;color:#4CAF50;background:rgba(0,0,0,.05);border-radius:20px;padding:.15rem .55rem;flex-shrink:0}
-    .cl{flex:1;padding:.5rem .6rem;columns:3;column-gap:.5rem;overflow:hidden}
+    .cl{padding:.5rem .6rem;columns:3;column-gap:.5rem}
     .card{break-inside:avoid;margin-bottom:.45rem;border-left:3px solid #4CAF50;background:color-mix(in srgb, #4CAF50 5%, transparent);border-radius:0 6px 6px 0;padding:.35rem .5rem;transition:transform .4s ease,opacity .4s ease;display:block}
     .card.enter{transform:translateX(-10px);opacity:0}
-    .cr{font-size:.88rem;color:#27272A;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .cr{font-size:.88rem;color:#27272A;line-height:1.4}
     .cname{font-size:.74rem;color:#4CAF50;margin-top:.15rem}
     .empty{font-size:.78rem;color:#D4D4D8;text-align:center;padding:.5rem}
-    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;background:#fff;border-top:1px solid #E4E4E7}
+    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;background:#fff;border-top:1px solid #E4E4E7;flex-shrink:0}
     #rbtn{background:transparent;border:1px solid #E4E4E7;color:#A1A1AA;border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;transition:color .2s,border-color .2s}
     #rbtn:hover{color:#EF4444;border-color:#EF4444}
   </style>
@@ -137,6 +139,18 @@ async function handleSubmit() {
 
 // ══ PANTALLA PRESENTADOR ════════════════
 const seen = new Set();
+const CAT_NAMES_KEY = 'laborativo_cat_names';
+
+function loadCatName(id) {
+  try { return JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}')[id] || null; } catch{ return null; }
+}
+function saveCatName(id, name) {
+  try {
+    const obj = JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}');
+    obj[id] = name;
+    localStorage.setItem(CAT_NAMES_KEY, JSON.stringify(obj));
+  } catch{}
+}
 
 async function initScreen() {
   const formUrl = location.origin + location.pathname + '?view=form';
@@ -156,12 +170,19 @@ async function initScreen() {
       <div id="sgrid">
         ${CATS.map(c=>`
           <div class="cs" style="--cc:${c.color}">
-            <div class="ch"><span class="cn">${c.name}</span><span class="ck" id="ck${c.id}">0</span></div>
+            <div class="ch"><span class="cn" id="cn${c.id}" contenteditable="true" spellcheck="false" data-id="${c.id}">${loadCatName(c.id)||c.name}</span><span class="ck" id="ck${c.id}">0</span></div>
             <div class="cl" id="cl${c.id}"><p class="empty">—</p></div>
           </div>`).join('')}
       </div>
       <div id="rbar"><button id="rbtn" onclick="resetAll()">🗑 Limpiar respuestas</button></div>
     </div>`;
+
+  // Guardar nombres al editar
+  CATS.forEach(c => {
+    const el = document.getElementById(`cn${c.id}`);
+    el.addEventListener('blur', () => saveCatName(c.id, el.textContent.trim()));
+    el.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); el.blur(); } });
+  });
 
   new QRCode(document.getElementById('qrwrap'), {
     text: formUrl, width:90, height:90,
@@ -194,7 +215,6 @@ function addCard(r) {
   el.innerHTML = `<p class="cr">${esc(r.response)}</p><p class="cname">${esc(r.name)}</p>`;
   list.prepend(el);
   requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('enter')));
-  while(list.children.length > 24) list.removeChild(list.lastChild);
   const cnt = document.getElementById(`ck${r.category_id}`);
   cnt.textContent = parseInt(cnt.textContent||0)+1;
   updateCount(seen.size);
