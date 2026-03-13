@@ -55,6 +55,7 @@
     .cn:hover{background:rgba(76,175,80,.12)}
     .cn:focus{background:rgba(76,175,80,.18)}
     .ck{font-size:1.3rem;font-weight:700;color:#4CAF50;background:rgba(76,175,80,.1);border-radius:20px;padding:.15rem .55rem;flex-shrink:0}
+    .cklabel{font-size:1rem;color:#4CAF50;flex-shrink:0}
     .cl{padding:0;columns:3;column-gap:.5rem}
     .card{break-inside:avoid;margin-bottom:.5rem;background:#fff;border:1.5px solid #4CAF50;border-top:3px solid #4CAF50;border-radius:0 !important;padding:.5rem .7rem;box-shadow:0 1px 4px rgba(0,0,0,.07);transition:transform .4s ease,opacity .4s ease;display:block;overflow:hidden}
     .card.enter{transform:translateY(-8px);opacity:0}
@@ -201,7 +202,7 @@ async function initScreen() {
       <div id="sgrid">
         ${CATS.map(c=>`
           <div class="cs" style="--cc:${c.color}">
-            <div class="ch"><span class="cn" id="cn${c.id}" contenteditable="true" spellcheck="false" data-id="${c.id}">${loadCatName(c.id)||c.name}</span><span class="ck" id="ck${c.id}">0</span></div>
+            <div class="ch"><span class="cn" id="cn${c.id}" contenteditable="true" spellcheck="false" data-id="${c.id}">${loadCatName(c.id)||c.name}</span><span class="ck" id="ck${c.id}">0</span><span class="cklabel">compromisos</span></div>
             <div class="cl" id="cl${c.id}"><p class="empty">—</p></div>
           </div>`).join('')}
       </div>
