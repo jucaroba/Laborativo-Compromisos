@@ -37,11 +37,11 @@
     /* SCREEN */
     #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 1.2rem;background:#4CAF50;flex-shrink:0}
-    #sleft{display:flex;flex-direction:column;gap:.15rem;min-width:110px}
-    #slogo2{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}
-    #spc{display:flex;align-items:baseline;gap:.3rem}
-    #spn{font-size:3rem;font-weight:800;color:#fff;line-height:1}
-    #spl{font-size:.9rem;color:rgba(255,255,255,.75)}
+    #sleft{display:flex;flex-direction:column;gap:.3rem;min-width:130px}
+    #slogo2{font-size:.72rem;color:rgba(255,255,255,.8);font-weight:500}
+    #spc{display:flex;flex-direction:column;align-items:flex-start;gap:0}
+    #spn{font-size:4.5rem;font-weight:800;color:#fff;line-height:1}
+    #spl{font-size:.85rem;color:rgba(255,255,255,.75);margin-top:.1rem}
     #sq{flex:1;font-size:1.96rem;font-weight:700;color:#fff;text-align:center;line-height:1.4;padding:0 1rem}
     #sqrbox{display:flex;flex-direction:column;align-items:center;gap:.3rem;min-width:100px}
     #qrwrap{background:rgba(255,255,255,.15);border-radius:8px;padding:6px;border:1px solid rgba(255,255,255,.3)}
@@ -171,8 +171,8 @@ async function initScreen() {
     <div id="sv">
       <header id="sh">
         <div id="sleft">
-          <span id="slogo2">laborativo</span>
-          <div id="spc"><span id="spn">0</span><span id="spl">&nbsp;participantes</span></div>
+          <span id="slogo2">una experiencia laborativo.</span>
+          <div id="spc"><span id="spn">0</span><span id="spl">participantes</span></div>
         </div>
         <h1 id="sq">${QUESTION}</h1>
         <div id="sqrbox">
