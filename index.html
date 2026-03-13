@@ -61,13 +61,33 @@
     .cr{font-size:1rem;color:#1C1C1E;line-height:1.45}
     .cname{font-size:.88rem;color:#2E7D32;margin-top:.25rem;font-weight:600}
     .empty{font-size:.78rem;color:#D4D4D8;text-align:center;padding:.5rem}
-    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;background:#fff;border-top:1px solid #E4E4E7;flex-shrink:0}
-    #rbtn{background:transparent;border:1px solid #E4E4E7;color:#A1A1AA;border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;transition:color .2s,border-color .2s}
+    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;gap:.5rem;background:#fff;border-top:1px solid #E4E4E7;flex-shrink:0}
+    #rbtn,#pbtn{border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;transition:color .2s,border-color .2s}
+    #rbtn{background:transparent;border:1px solid #E4E4E7;color:#A1A1AA}
     #rbtn:hover{color:#EF4444;border-color:#EF4444}
+    #pbtn{background:transparent;border:1px solid #4CAF50;color:#4CAF50}
+    #pbtn:hover{background:#4CAF50;color:#fff}
+
+    /* PRINT */
+    #print-view{display:none}
+    @media print{
+      #root{display:none}
+      #print-view{display:block;font-family:'DM Sans',sans-serif;color:#1C1C1E;padding:2.5rem}
+      .ph{margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid #4CAF50}
+      .ph h1{font-size:1.4rem;font-weight:800;margin-bottom:.2rem}
+      .ph p{font-size:.8rem;color:#71717A}
+      .pcat{margin-top:2rem;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:2px solid #4CAF50;display:flex;align-items:baseline;gap:.75rem}
+      .pcat h2{font-size:1.15rem;font-weight:700;color:#4CAF50}
+      .pcat span{font-size:.78rem;color:#A1A1AA}
+      .pcard{padding:.5rem 0;border-bottom:1px solid #F0F0F0}
+      .pcr{font-size:.9rem;line-height:1.45}
+      .pcname{font-size:.78rem;color:#2E7D32;font-weight:600;margin-top:.2rem}
+    }
   </style>
 </head>
 <body>
 <div id="root"></div>
+<div id="print-view"></div>
 <script>
 // ─────────────────────────────────────────
 // CONFIGURACIÓN — edita estos 2 valores
@@ -188,7 +208,10 @@ async function initScreen() {
             <div class="cl" id="cl${c.id}"><p class="empty">—</p></div>
           </div>`).join('')}
       </div>
-      <div id="rbar"><button id="rbtn" onclick="resetAll()">🗑 Limpiar respuestas</button></div>
+      <div id="rbar">
+        <button id="pbtn" onclick="exportPDF()">↓ Exportar PDF</button>
+        <button id="rbtn" onclick="resetAll()">🗑 Limpiar respuestas</button>
+      </div>
     </div>`;
 
   // Guardar nombres al editar
@@ -246,6 +269,28 @@ async function resetAll() {
     document.getElementById(`ck${c.id}`).textContent='0';
   });
   updateCount(0);
+}
+
+async function exportPDF() {
+  const { data } = await sb.from('commitments').select('*').order('created_at', {ascending:true});
+  const { data: cats } = await sb.from('categories').select('*').order('id');
+  const categories = cats?.length ? cats : CATS.map(c=>({id:c.id, name:c.name}));
+
+  const date = new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
+  let html = `<div class="ph"><h1>Compromisos de Equipo</h1><p>${date}</p></div>`;
+
+  categories.forEach(cat => {
+    const domEl = document.getElementById(`cn${cat.id}`);
+    const name = domEl ? domEl.textContent.trim() : cat.name;
+    const items = (data||[]).filter(r => r.category_id === cat.id);
+    html += `<div class="pcat"><h2>${esc(name)}</h2><span>${items.length} compromisos</span></div>`;
+    items.forEach(r => {
+      html += `<div class="pcard"><p class="pcr">${esc(r.response)}</p><p class="pcname">${esc(r.name)}</p></div>`;
+    });
+  });
+
+  document.getElementById('print-view').innerHTML = html;
+  window.print();
 }
 
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
