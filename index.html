@@ -21,6 +21,10 @@
     .fg label{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:#71717A;font-weight:600}
     .fg input,.fg textarea{background:#fff;border:1.5px solid #E4E4E7;border-radius:10px;padding:.75rem 1rem;color:#18181B;font-size:.95rem;font-family:inherit;resize:none;outline:none;transition:border .2s}
     .fg input:focus,.fg textarea:focus{border-color:#4CAF50}
+    #catsel{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+    .catopt{border:1.5px solid #E4E4E7;border-radius:10px;padding:.75rem 1rem;cursor:pointer;transition:all .15s;font-weight:600;color:#52525B;font-size:.95rem;text-align:center}
+    .catopt:hover{border-color:#4CAF50;background:rgba(76,175,80,.05)}
+    .catopt.sel{border-color:#4CAF50;background:rgba(76,175,80,.08);color:#4CAF50}
     #charcnt{font-size:.68rem;color:#A1A1AA;text-align:right;margin-top:.2rem}
     #sb{width:100%;padding:.9rem;background:#4CAF50;border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.3rem}
     #sb:hover{background:#43A047}
@@ -82,7 +86,12 @@ const isForm = new URLSearchParams(location.search).get('view') === 'form';
 isForm ? initForm() : initScreen();
 
 // ══ FORMULARIO ══════════════════════════
-function initForm() {
+let selectedCatId = null;
+
+async function initForm() {
+  const { data: cats } = await sb.from('categories').select('*').order('id');
+  const categories = cats?.length ? cats : CATS.map(c=>({id:c.id, name:c.name}));
+
   document.getElementById('root').innerHTML = `
     <div id="fv"><div id="fc">
       <p id="flogo">laborativo</p>
@@ -92,6 +101,12 @@ function initForm() {
         <div class="fg">
           <label>Tu nombre</label>
           <input id="ni" type="text" placeholder="Ej: Camilo Restrepo" maxlength="60" autocomplete="off">
+        </div>
+        <div class="fg">
+          <label>Categoría</label>
+          <div id="catsel">
+            ${categories.map(c=>`<div class="catopt" data-id="${c.id}" onclick="selectCat(${c.id})">${esc(c.name)}</div>`).join('')}
+          </div>
         </div>
         <div class="fg">
           <label>Tu compromiso</label>
@@ -106,32 +121,30 @@ function initForm() {
         <p>Tu respuesta ya aparece en la pantalla del salón</p>
       </div>
     </div></div>`;
+
   document.getElementById('ri').oninput = function(){
     document.getElementById('charcnt').textContent = `${this.value.length} / 220`;
   };
 }
 
+function selectCat(id) {
+  selectedCatId = id;
+  document.querySelectorAll('.catopt').forEach(el => {
+    el.classList.toggle('sel', parseInt(el.dataset.id) === id);
+  });
+}
+
 async function handleSubmit() {
   const name = document.getElementById('ni').value.trim();
   const resp = document.getElementById('ri').value.trim();
-  if (!name) { alert('Por favor escribe tu nombre'); return; }
-  if (!resp)  { alert('Por favor escribe tu compromiso'); return; }
+  if (!name)           { alert('Por favor escribe tu nombre'); return; }
+  if (!selectedCatId)  { alert('Por favor selecciona una categoría'); return; }
+  if (!resp)           { alert('Por favor escribe tu compromiso'); return; }
 
   const btn = document.getElementById('sb');
   btn.textContent = '⏳ Enviando...'; btn.disabled = true;
 
-  let catId = 1;
-  try {
-    const r = await fetch('/api/classify', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ text: resp })
-    });
-    const d = await r.json();
-    catId = d.catId || 1;
-  } catch(e) { catId = Math.ceil(Math.random()*2); }
-
-  await sb.from('commitments').insert({ name, response: resp, category_id: catId });
+  await sb.from('commitments').insert({ name, response: resp, category_id: selectedCatId });
 
   document.getElementById('ff').style.display = 'none';
   document.getElementById('success').style.display = 'flex';
@@ -144,12 +157,13 @@ const CAT_NAMES_KEY = 'laborativo_cat_names';
 function loadCatName(id) {
   try { return JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}')[id] || null; } catch{ return null; }
 }
-function saveCatName(id, name) {
+async function saveCatName(id, name) {
   try {
     const obj = JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}');
     obj[id] = name;
     localStorage.setItem(CAT_NAMES_KEY, JSON.stringify(obj));
   } catch{}
+  await sb.from('categories').upsert({id, name});
 }
 
 async function initScreen() {
