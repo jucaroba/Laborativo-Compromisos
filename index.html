@@ -34,6 +34,16 @@
     #success h3{color:#18181B;font-size:1.1rem}
     #success p{color:#71717A;font-size:.88rem}
 
+    /* INTRO */
+    #iv{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#4CAF50;gap:2.5rem;padding:2rem}
+    #iq{font-size:3.4rem;font-weight:800;color:#fff;text-align:center;line-height:1.25;max-width:860px}
+    #iqrwrap{background:#fff;border-radius:16px;padding:1.2rem;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+    #iqrwrap canvas{display:block;border-radius:6px}
+    #iqlabel{font-size:1.2rem;color:rgba(255,255,255,.85);text-align:center;font-weight:500}
+    #ienter{padding:1rem 2.8rem;background:#fff;border:none;border-radius:12px;color:#4CAF50;font-size:1.15rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.15)}
+    #ienter:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    #ilogo{font-size:.95rem;color:rgba(255,255,255,.65);position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%)}
+
     /* SCREEN */
     #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 1.2rem;background:#4CAF50;flex-shrink:0}
@@ -185,6 +195,25 @@ async function saveCatName(id, name) {
 }
 
 async function initScreen() {
+  const formUrl = location.origin + location.pathname + '?view=form';
+
+  // Vista de inicio
+  document.getElementById('root').innerHTML = `
+    <div id="iv" style="position:relative">
+      <h1 id="iq">${QUESTION}</h1>
+      <div id="iqrwrap"></div>
+      <p id="iqlabel">Escanea para participar</p>
+      <button id="ienter" onclick="showCommitmentsView()">Ver compromisos →</button>
+      <span id="ilogo">una experiencia laborativo.</span>
+    </div>`;
+
+  new QRCode(document.getElementById('iqrwrap'), {
+    text: formUrl, width:280, height:280,
+    colorDark:'#4CAF50', colorLight:'#ffffff'
+  });
+}
+
+async function showCommitmentsView() {
   const formUrl = location.origin + location.pathname + '?view=form';
   document.getElementById('root').innerHTML = `
     <div id="sv">
