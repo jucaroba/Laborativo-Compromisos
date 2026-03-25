@@ -72,9 +72,11 @@
     .cr{font-size:1rem;color:#1C1C1E;line-height:1.45}
     .cname{font-size:.88rem;color:#2E7D32;margin-top:.25rem;font-weight:600}
     .empty{font-size:.78rem;color:#D4D4D8;text-align:center;padding:.5rem}
-    #rbar{padding:.35rem .9rem;display:flex;justify-content:flex-end;gap:.5rem;background:#fff;border-top:1px solid #E4E4E7;flex-shrink:0}
+    #rbar{padding:.35rem .9rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem;background:#fff;border-top:1px solid #E4E4E7;flex-shrink:0}
     #rbtn,#pbtn{border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;background:#4CAF50;border:none;color:#fff;transition:background .2s}
     #rbtn:hover,#pbtn:hover{background:#388E3C}
+    #bbtn{border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;background:transparent;border:1.5px solid #E4E4E7;color:#71717A;transition:all .2s;font-family:inherit}
+    #bbtn:hover{border-color:#4CAF50;color:#4CAF50}
 
     /* PRINT */
     #print-view{display:none}
@@ -236,8 +238,11 @@ async function showCommitmentsView() {
           </div>`).join('')}
       </div>
       <div id="rbar">
-        <button id="pbtn" onclick="exportPDF()">Exportar PDF</button>
-        <button id="rbtn" onclick="resetAll()">Limpiar respuestas</button>
+        <button id="bbtn" onclick="initScreen()">← Volver al código QR</button>
+        <div style="display:flex;gap:.5rem">
+          <button id="pbtn" onclick="exportPDF()">Exportar PDF</button>
+          <button id="rbtn" onclick="resetAll()">Limpiar respuestas</button>
+        </div>
       </div>
     </div>`;
 
