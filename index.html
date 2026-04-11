@@ -88,7 +88,7 @@
     #av{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     /* Header igual al de Preguntas */
     #ah{padding:.7rem 1.25rem;background:var(--c);display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-    #ahlogomark{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:800;color:#fff;flex-shrink:0}
+    #ahlogomark{height:28px;object-fit:contain;flex-shrink:0}
     #ahlogo{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.01em}
     #abody{flex:1;display:flex;overflow:hidden}
     /* Sidebar */
@@ -236,7 +236,7 @@ async function initAdmin() {
   document.getElementById('root').innerHTML = `
     <div id="av">
       <header id="ah">
-        <div id="ahlogomark">C</div>
+        <img id="ahlogomark" src="logo.png" alt="Laborativo">
         <span id="ahlogo">Laborativo Compromisos · Admin</span>
       </header>
       <div id="abody">
@@ -293,7 +293,6 @@ function renderAdminSidebar() {
       <span class="ascolordot" style="background:${s.color||'#4CAF50'}"></span>
       <div class="asinfo">
         <span class="asname">${esc(s.name)}</span>
-        <span class="asmeta">${adminCounts[s.id] || 0} compromisos</span>
       </div>
       <button class="asdel" onclick="deleteSession(event,'${s.id}')" title="Eliminar sesión">×</button>
     </div>`).join('');
