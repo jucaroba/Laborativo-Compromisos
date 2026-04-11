@@ -88,7 +88,8 @@
     #av{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     /* Header igual al de Preguntas */
     #ah{padding:.7rem 1.25rem;background:var(--c);display:flex;align-items:center;gap:.75rem;flex-shrink:0}
-    #ahlogomark{height:28px;object-fit:contain;flex-shrink:0;filter:brightness(0) invert(1)}
+    #ahlogomark{height:22px;object-fit:contain;flex-shrink:0;filter:brightness(0) invert(1)}
+    #ahslash{color:rgba(255,255,255,.35);font-size:1.1rem;font-weight:300;margin:0 .1rem}
     #ahlogo{font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.01em}
     #abody{flex:1;display:flex;overflow:hidden}
     /* Sidebar */
@@ -237,7 +238,8 @@ async function initAdmin() {
     <div id="av">
       <header id="ah">
         <img id="ahlogomark" src="logo.png" alt="Laborativo">
-        <span id="ahlogo">Laborativo Compromisos · Admin</span>
+        <span id="ahslash">/</span>
+        <span id="ahlogo">Compromisos · Admin</span>
       </header>
       <div id="abody">
         <aside id="asidebar">
