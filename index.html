@@ -702,7 +702,6 @@ async function showIntroView() {
         <div id="iqrwrap"></div>
         <p id="iqlabel">Escanea para participar</p>
         <div id="iparticipants">
-          <p id="ipartcount">0 compromisos registrados</p>
           <div id="ipartchips"></div>
         </div>
         <button id="ienter" onclick="showCommitmentsView()">Ver compromisos →</button>
@@ -740,10 +739,7 @@ function introAddChip(r) {
   chips.appendChild(el);
 }
 
-function updateIntroCount(n) {
-  const el = document.getElementById('ipartcount');
-  if (el) el.textContent = `${n} compromiso${n !== 1 ? 's' : ''} registrado${n !== 1 ? 's' : ''}`;
-}
+function updateIntroCount(n) {}
 
 async function showCommitmentsView() {
   const formUrl = `${location.origin}${location.pathname}?view=form&session=${SESSION_ID}`;
