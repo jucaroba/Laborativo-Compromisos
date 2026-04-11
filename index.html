@@ -34,14 +34,21 @@
     #fsuccess p{color:#71717A;font-size:.88rem}
 
     /* ── INTRO ─────────────────────────────────────────────── */
-    #iv{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#4CAF50;gap:2.5rem;padding:2rem;position:relative}
-    #iq{font-size:3.4rem;font-weight:800;color:#fff;text-align:center;line-height:1.25;max-width:860px}
-    #iqrwrap{background:#fff;border-radius:16px;padding:1.2rem;box-shadow:0 8px 32px rgba(0,0,0,.18)}
-    #iqrwrap canvas{display:block;border-radius:6px}
-    #iqlabel{font-size:1.2rem;color:rgba(255,255,255,.85);text-align:center;font-weight:500;margin-top:-1.5rem}
-    #ienter{padding:1rem 2.8rem;background:#fff;border:none;border-radius:12px;color:#4CAF50;font-size:1.15rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.15)}
-    #ienter:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-    #ilogo{font-size:.95rem;color:rgba(255,255,255,.65);position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%)}
+    #iv{min-height:100vh;display:flex;flex-direction:column;background:#1A1A1A;color:#fff}
+    #iheader{display:flex;flex-direction:column;align-items:center;padding-top:3.5rem;gap:.3rem;flex-shrink:0}
+    #isubtitle{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:500}
+    #ilogoimg{height:56px;object-fit:contain}
+    #icenter{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;gap:2rem}
+    #iq{font-size:3.75rem;font-weight:800;color:#4CAF50;text-align:center;line-height:1.2;max-width:860px}
+    #iqrwrap{background:#fff;border-radius:24px;padding:1.25rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
+    #iqrwrap canvas{display:block}
+    #iqlabel{font-size:1.5rem;font-weight:700;color:#fff;text-align:center}
+    #iparticipants{display:flex;flex-direction:column;align-items:center;gap:.75rem;margin-top:.5rem}
+    #ipartcount{font-size:.875rem;color:#4CAF50;font-weight:500}
+    #ipartchips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:700px}
+    .ichip{padding:.25rem .75rem;border-radius:9999px;font-size:.875rem;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB}
+    #ienter{padding:1rem 2.8rem;background:#4CAF50;border:none;border-radius:12px;color:#fff;font-size:1.15rem;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;font-family:inherit;box-shadow:0 4px 16px rgba(76,175,80,.35)}
+    #ienter:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(76,175,80,.45)}
 
     /* ── SCREEN ────────────────────────────────────────────── */
     #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
@@ -597,22 +604,63 @@ async function initScreen() {
   showIntroView();
 }
 
-function showIntroView() {
+async function showIntroView() {
   const formUrl = `${location.origin}${location.pathname}?view=form&session=${SESSION_ID}`;
 
   document.getElementById('root').innerHTML = `
     <div id="iv">
-      <h1 id="iq">${esc(screenSession.question)}</h1>
-      <div id="iqrwrap"></div>
-      <p id="iqlabel">Escanea para participar</p>
-      <button id="ienter" onclick="showCommitmentsView()">Ver compromisos →</button>
-      <span id="ilogo">una experiencia laborativo.</span>
+      <div id="iheader">
+        <span id="isubtitle">una experiencia</span>
+        <img id="ilogoimg" src="logo.png" alt="Laborativo">
+      </div>
+      <div id="icenter">
+        <h1 id="iq">${esc(screenSession.question)}</h1>
+        <div id="iqrwrap"></div>
+        <p id="iqlabel">Escanea para participar</p>
+        <div id="iparticipants">
+          <p id="ipartcount">0 compromisos registrados</p>
+          <div id="ipartchips"></div>
+        </div>
+        <button id="ienter" onclick="showCommitmentsView()">Ver compromisos →</button>
+      </div>
     </div>`;
 
   new QRCode(document.getElementById('iqrwrap'), {
-    text: formUrl, width: 280, height: 280,
-    colorDark: '#4CAF50', colorLight: '#ffffff'
+    text: formUrl, width: 312, height: 312,
+    colorDark: '#000000', colorLight: '#ffffff'
   });
+
+  // Carga inicial de nombres
+  const { data } = await sb.from('commitments')
+    .select('id, name').eq('session_id', SESSION_ID).order('created_at', { ascending: true });
+  const existing = data || [];
+  existing.forEach(r => introAddChip(r));
+  updateIntroCount(existing.length);
+
+  // Tiempo real en la vista intro
+  sb.channel(`intro_${SESSION_ID}`)
+    .on('postgres_changes', {
+      event: 'INSERT', schema: 'public', table: 'commitments',
+      filter: `session_id=eq.${SESSION_ID}`
+    }, p => {
+      introAddChip(p.new);
+      updateIntroCount(document.querySelectorAll('.ichip').length);
+    })
+    .subscribe();
+}
+
+function introAddChip(r) {
+  const chips = document.getElementById('ipartchips');
+  if (!chips) return;
+  const el = document.createElement('span');
+  el.className = 'ichip';
+  el.textContent = r.name;
+  chips.appendChild(el);
+}
+
+function updateIntroCount(n) {
+  const el = document.getElementById('ipartcount');
+  if (el) el.textContent = `${n} compromiso${n !== 1 ? 's' : ''} registrado${n !== 1 ? 's' : ''}`;
 }
 
 async function showCommitmentsView() {
