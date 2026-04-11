@@ -11,10 +11,9 @@
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'DM Sans',system-ui,-apple-system,sans-serif;background:#F4F4F5;color:#18181B}
 
-    /* FORM */
+    /* ── FORM ──────────────────────────────────────────────── */
     #fv{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:#F4F4F5;overflow-y:auto}
     #fc{width:100%;max-width:460px;background:#fff;border:1px solid #E4E4E7;border-radius:16px;padding:2rem;box-shadow:0 1px 6px rgba(0,0,0,.06)}
-    #ftag{font-size:.78rem;color:#A1A1AA;margin-bottom:1.5rem}
     #ffoot{font-size:.72rem;color:#A1A1AA;text-align:center;margin-top:1.2rem}
     #fq{font-size:1.65rem;font-weight:700;color:#fff;line-height:1.25;background:#4CAF50;margin:-2rem -2rem 1.75rem -2rem;padding:1.4rem 2rem;border-radius:14px 14px 0 0}
     .fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
@@ -26,16 +25,16 @@
     .catopt:hover{border-color:#4CAF50;background:rgba(76,175,80,.05)}
     .catopt.sel{border-color:#4CAF50;background:rgba(76,175,80,.08);color:#4CAF50}
     #charcnt{font-size:.68rem;color:#A1A1AA;text-align:right;margin-top:.2rem}
-    #sb{width:100%;padding:.9rem;background:#4CAF50;border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.3rem}
-    #sb:hover{background:#43A047}
-    #sb:disabled{opacity:.5;cursor:default}
-    #success{display:none;flex-direction:column;align-items:center;text-align:center;gap:.75rem;padding:1.5rem 0}
-    #sicon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#4CAF50,#388E3C);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff}
-    #success h3{color:#18181B;font-size:1.1rem}
-    #success p{color:#71717A;font-size:.88rem}
+    #fsbtn{width:100%;padding:.9rem;background:#4CAF50;border:none;border-radius:10px;color:#fff;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.3rem}
+    #fsbtn:hover{background:#43A047}
+    #fsbtn:disabled{opacity:.5;cursor:default}
+    #fsuccess{display:none;flex-direction:column;align-items:center;text-align:center;gap:.75rem;padding:1.5rem 0}
+    #fsicon{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#4CAF50,#388E3C);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff}
+    #fsuccess h3{color:#18181B;font-size:1.1rem}
+    #fsuccess p{color:#71717A;font-size:.88rem}
 
-    /* INTRO */
-    #iv{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#4CAF50;gap:2.5rem;padding:2rem}
+    /* ── INTRO ─────────────────────────────────────────────── */
+    #iv{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#4CAF50;gap:2.5rem;padding:2rem;position:relative}
     #iq{font-size:3.4rem;font-weight:800;color:#fff;text-align:center;line-height:1.25;max-width:860px}
     #iqrwrap{background:#fff;border-radius:16px;padding:1.2rem;box-shadow:0 8px 32px rgba(0,0,0,.18)}
     #iqrwrap canvas{display:block;border-radius:6px}
@@ -44,7 +43,7 @@
     #ienter:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
     #ilogo{font-size:.95rem;color:rgba(255,255,255,.65);position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%)}
 
-    /* SCREEN */
+    /* ── SCREEN ────────────────────────────────────────────── */
     #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 10rem;background:#4CAF50;flex-shrink:0}
     #sleft{display:flex;flex-direction:column;gap:.3rem;min-width:130px}
@@ -61,10 +60,8 @@
     #sgrid::before{content:'';position:absolute;left:50%;top:.75rem;bottom:.75rem;border-left:2px dashed #B0BEC5;pointer-events:none}
     .cs{background:transparent;border:none;display:flex;flex-direction:column;padding:0 1rem}
     .ch{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.3rem .1rem .5rem;margin-bottom:.3rem}
-    .cn{font-size:1.64rem;font-weight:600;color:#4CAF50;outline:none;cursor:text;border-radius:4px;padding:2px 4px;transition:background .15s;text-align:center}
+    .cn{font-size:1.64rem;font-weight:600;color:#4CAF50;text-align:center}
     .ch-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
-    .cn:hover{background:rgba(76,175,80,.12)}
-    .cn:focus{background:rgba(76,175,80,.18)}
     .ck{font-size:1.3rem;font-weight:700;color:#4CAF50;background:rgba(76,175,80,.1);border-radius:20px;padding:.15rem .55rem;flex-shrink:0}
     .cklabel{font-size:1rem;color:#4CAF50;flex-shrink:0}
     .cl{padding:0;columns:3;column-gap:.5rem}
@@ -79,7 +76,67 @@
     #bbtn{border-radius:6px;padding:.2rem .65rem;font-size:.72rem;cursor:pointer;background:transparent;border:1.5px solid #E4E4E7;color:#71717A;transition:all .2s;font-family:inherit}
     #bbtn:hover{border-color:#4CAF50;color:#4CAF50}
 
-    /* PRINT */
+    /* ── ADMIN ─────────────────────────────────────────────── */
+    #av{height:100vh;display:flex;flex-direction:column;overflow:hidden}
+    #ah{padding:.75rem 1.5rem;background:#4CAF50;display:flex;align-items:center;gap:1rem;flex-shrink:0}
+    #ahlogo{font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:.01em}
+    #abody{flex:1;display:flex;overflow:hidden}
+    #asidebar{width:280px;background:#fff;border-right:1px solid #E4E4E7;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+    #anewwrap{padding:1rem;border-bottom:1px solid #E4E4E7;display:flex;gap:.5rem;flex-shrink:0}
+    #anewi{flex:1;border:1.5px solid #E4E4E7;border-radius:8px;padding:.5rem .75rem;font-size:.88rem;font-family:inherit;outline:none;color:#18181B;transition:border .2s}
+    #anewi:focus{border-color:#4CAF50}
+    #anewb{padding:.5rem .9rem;background:#4CAF50;border:none;border-radius:8px;color:#fff;font-size:.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:background .2s;font-family:inherit}
+    #anewb:hover{background:#43A047}
+    #anewb:disabled{opacity:.5;cursor:default}
+    #alist{flex:1;overflow-y:auto;padding:.5rem}
+    .aemptylist{font-size:.82rem;color:#A1A1AA;text-align:center;padding:1.5rem 1rem;line-height:1.6}
+    .asession{padding:.65rem .8rem;border-radius:8px;cursor:pointer;transition:background .15s;position:relative;display:flex;flex-direction:column;gap:.15rem;margin-bottom:.2rem}
+    .asession:hover{background:#F4F4F5}
+    .asession.active{background:rgba(76,175,80,.08);border:1.5px solid rgba(76,175,80,.3)}
+    .asname{font-size:.92rem;font-weight:600;color:#18181B;padding-right:1.8rem;line-height:1.3}
+    .asmeta{font-size:.74rem;color:#A1A1AA}
+    .asdel{position:absolute;top:.5rem;right:.5rem;background:none;border:none;color:#D4D4D8;cursor:pointer;font-size:1.1rem;line-height:1;padding:.1rem .3rem;border-radius:4px;transition:all .15s;opacity:0}
+    .asession:hover .asdel{opacity:1}
+    .asdel:hover{color:#EF4444;background:#FEF2F2}
+    #amain{flex:1;overflow-y:auto;background:#F4F4F5;padding:1.5rem}
+    #aempty{display:flex;align-items:center;justify-content:center;height:100%;font-size:.9rem;color:#A1A1AA}
+    #adetail{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:1rem}
+    .asec{background:#fff;border:1px solid #E4E4E7;border-radius:12px;padding:1.2rem}
+    .aseclabel{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#A1A1AA;font-weight:600;margin-bottom:.6rem}
+    .aval{font-size:1rem;color:#18181B;cursor:pointer;padding:.4rem .5rem;border-radius:6px;transition:background .15s;line-height:1.4}
+    .aval:hover{background:#F4F4F5}
+    .aquestval{font-size:1.1rem;font-weight:600}
+    .aeditlabel{font-size:.72rem;color:#A1A1AA;margin-left:.4rem;font-weight:400;vertical-align:middle}
+    .aeditwrap{display:flex;flex-direction:column;gap:.5rem}
+    .aedrow{display:flex;gap:.5rem;margin-top:.25rem}
+    .aedit{border:1.5px solid #E4E4E7;border-radius:8px;padding:.6rem .8rem;font-size:.95rem;font-family:inherit;outline:none;color:#18181B;transition:border .2s;width:100%;resize:vertical}
+    .aedit:focus{border-color:#4CAF50}
+    .asave{padding:.4rem .9rem;background:#4CAF50;border:none;border-radius:6px;color:#fff;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s}
+    .asave:hover{background:#43A047}
+    .acancel{padding:.4rem .9rem;background:transparent;border:1.5px solid #E4E4E7;border-radius:6px;color:#71717A;font-size:.82rem;cursor:pointer;font-family:inherit;transition:all .2s}
+    .acancel:hover{border-color:#A1A1AA}
+    .asave.sm,.acancel.sm{padding:.25rem .6rem;font-size:.78rem}
+    #acatlist{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.8rem}
+    .acatrow{display:flex;align-items:center;gap:.5rem;padding:.3rem .2rem;border-radius:6px}
+    .acatname{flex:1;font-size:.95rem;color:#18181B;font-weight:500}
+    .acatbtns{display:flex;gap:.3rem;flex-shrink:0}
+    .acatbtn{padding:.25rem .6rem;border-radius:5px;font-size:.75rem;cursor:pointer;background:transparent;border:1.5px solid #E4E4E7;color:#71717A;font-family:inherit;transition:all .15s}
+    .acatbtn:hover{border-color:#4CAF50;color:#4CAF50}
+    .acatbtn.del:hover{border-color:#EF4444;color:#EF4444}
+    .acatedit{flex:1;border:1.5px solid #4CAF50;border-radius:6px;padding:.35rem .65rem;font-size:.9rem;font-family:inherit;outline:none;color:#18181B}
+    .aaddcat{padding:.45rem 1rem;background:transparent;border:1.5px dashed #D4D4D8;border-radius:8px;color:#71717A;font-size:.85rem;cursor:pointer;font-family:inherit;transition:all .15s;width:100%}
+    .aaddcat:hover{border-color:#4CAF50;color:#4CAF50}
+    .astat{font-size:1rem;color:#18181B}
+    .aactions{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+    .aactionbtn{padding:.6rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;text-decoration:none;border:none;display:inline-flex;align-items:center}
+    .aactionbtn.primary{background:#4CAF50;color:#fff}
+    .aactionbtn.primary:hover{background:#43A047}
+    .aactionbtn.secondary{background:transparent;border:1.5px solid #E4E4E7;color:#52525B}
+    .aactionbtn.secondary:hover{border-color:#4CAF50;color:#4CAF50}
+    .aactionbtn.danger{background:transparent;border:1.5px solid #E4E4E7;color:#71717A;margin-left:auto}
+    .aactionbtn.danger:hover{border-color:#EF4444;color:#EF4444}
+
+    /* ── PRINT ─────────────────────────────────────────────── */
     #print-view{display:none}
     @media print{
       #root{display:none}
@@ -101,33 +158,361 @@
 <div id="print-view"></div>
 <script>
 // ─────────────────────────────────────────
-// CONFIGURACIÓN — edita estos 2 valores
+// CONFIGURACIÓN
 // ─────────────────────────────────────────
 const SUPABASE_URL  = 'https://vnyzgbzqwqorimssuxza.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZueXpnYnpxd3Fvcmltc3N1eHphIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNTY2MTgsImV4cCI6MjA4ODkzMjYxOH0.sjRR89kZb8Dk5Dtuj4xmntlC2KX9IDzIeMwGBGvLUF8';
-// ─────────────────────────────────────────
-
-const QUESTION = '¿A qué te comprometes para ganar como equipo?';
-const CATS = [
-  {id:1, name:'Categoría 1', color:'#4CAF50'},
-  {id:2, name:'Categoría 2', color:'#4CAF50'},
-];
 
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-const isForm = new URLSearchParams(location.search).get('view') === 'form';
-isForm ? initForm() : initScreen();
+const params = new URLSearchParams(location.search);
+const VIEW = params.get('view') || 'admin';
+const SESSION_ID = params.get('session');
 
-// ══ FORMULARIO ══════════════════════════
-let selectedCatId = null;
+if      (VIEW === 'form'   && SESSION_ID) initForm();
+else if (VIEW === 'screen' && SESSION_ID) initScreen();
+else                                       initAdmin();
+
+// ══════════════════════════════════════════════════════════════
+// ADMIN
+// ══════════════════════════════════════════════════════════════
+
+let adminSessions   = [];
+let adminSelected   = null;
+let adminCats       = [];
+let adminCounts     = {};
+let adminEditField  = null;   // 'name' | 'question' | null
+let adminEditCatId  = null;
+
+async function initAdmin() {
+  document.getElementById('root').innerHTML = `
+    <div id="av">
+      <header id="ah">
+        <span id="ahlogo">Compromisos — Admin</span>
+      </header>
+      <div id="abody">
+        <aside id="asidebar">
+          <div id="anewwrap">
+            <input id="anewi" type="text" placeholder="Nombre de la sesión" maxlength="80" autocomplete="off">
+            <button id="anewb" onclick="createSession()">Crear</button>
+          </div>
+          <div id="alist"></div>
+        </aside>
+        <main id="amain">
+          <div id="aempty">Selecciona una sesión para editarla</div>
+        </main>
+      </div>
+    </div>`;
+
+  document.getElementById('anewi').addEventListener('keydown', e => {
+    if (e.key === 'Enter') createSession();
+  });
+
+  await loadAdminSessions();
+}
+
+async function loadAdminSessions() {
+  const { data: sessions } = await sb.from('sessions').select('*').order('created_at', { ascending: false });
+  adminSessions = sessions || [];
+
+  if (adminSessions.length) {
+    const ids = adminSessions.map(s => s.id);
+    const { data: rows } = await sb.from('commitments').select('session_id').in('session_id', ids);
+    adminCounts = {};
+    (rows || []).forEach(r => {
+      adminCounts[r.session_id] = (adminCounts[r.session_id] || 0) + 1;
+    });
+  }
+
+  renderAdminSidebar();
+}
+
+function renderAdminSidebar() {
+  const list = document.getElementById('alist');
+  if (!list) return;
+
+  if (!adminSessions.length) {
+    list.innerHTML = '<p class="aemptylist">No hay sesiones.<br>Crea una arriba.</p>';
+    return;
+  }
+
+  list.innerHTML = adminSessions.map(s => `
+    <div class="asession${adminSelected?.id === s.id ? ' active' : ''}" onclick="selectSession('${s.id}')">
+      <span class="asname">${esc(s.name)}</span>
+      <span class="asmeta">${adminCounts[s.id] || 0} compromisos</span>
+      <button class="asdel" onclick="deleteSession(event,'${s.id}')" title="Eliminar sesión">×</button>
+    </div>`).join('');
+}
+
+async function selectSession(id) {
+  adminSelected  = adminSessions.find(s => s.id === id) || null;
+  adminEditField = null;
+  adminEditCatId = null;
+  renderAdminSidebar();
+  if (!adminSelected) return;
+
+  const { data } = await sb.from('session_categories')
+    .select('*').eq('session_id', id).order('order_index');
+  adminCats = data || [];
+  renderAdminMain();
+}
+
+function renderAdminMain() {
+  const main = document.getElementById('amain');
+  if (!main) return;
+
+  if (!adminSelected) {
+    main.innerHTML = '<div id="aempty">Selecciona una sesión para editarla</div>';
+    return;
+  }
+
+  const s       = adminSelected;
+  const count   = adminCounts[s.id] || 0;
+  const formUrl = `${location.origin}${location.pathname}?view=form&session=${s.id}`;
+  const screenUrl = `${location.origin}${location.pathname}?view=screen&session=${s.id}`;
+
+  main.innerHTML = `
+    <div id="adetail">
+
+      <div class="asec">
+        <div class="aseclabel">Nombre de la sesión</div>
+        ${adminEditField === 'name' ? `
+          <div class="aeditwrap">
+            <input id="anamei" type="text" value="${esc(s.name)}" maxlength="80" class="aedit"
+              onkeydown="if(event.key==='Enter')saveSessionName();if(event.key==='Escape')cancelAdminEdit()">
+            <div class="aedrow">
+              <button class="asave" onclick="saveSessionName()">Guardar</button>
+              <button class="acancel" onclick="cancelAdminEdit()">Cancelar</button>
+            </div>
+          </div>
+        ` : `
+          <div class="aval" onclick="startAdminEdit('name')">${esc(s.name)}<span class="aeditlabel">editar</span></div>
+        `}
+      </div>
+
+      <div class="asec">
+        <div class="aseclabel">Pregunta / Compromiso</div>
+        ${adminEditField === 'question' ? `
+          <div class="aeditwrap">
+            <textarea id="aquesti" class="aedit" rows="3" maxlength="200">${esc(s.question)}</textarea>
+            <div class="aedrow">
+              <button class="asave" onclick="saveSessionQuestion()">Guardar</button>
+              <button class="acancel" onclick="cancelAdminEdit()">Cancelar</button>
+            </div>
+          </div>
+        ` : `
+          <div class="aval aquestval" onclick="startAdminEdit('question')">${esc(s.question)}<span class="aeditlabel">editar</span></div>
+        `}
+      </div>
+
+      <div class="asec">
+        <div class="aseclabel">Categorías</div>
+        <div id="acatlist">
+          ${adminCats.map(c => `
+            <div class="acatrow">
+              ${adminEditCatId === c.id ? `
+                <input id="acati_${c.id}" class="acatedit" type="text" value="${esc(c.name)}" maxlength="60"
+                  onkeydown="if(event.key==='Enter')saveCat('${c.id}');if(event.key==='Escape')cancelAdminEdit()">
+                <button class="asave sm" onclick="saveCat('${c.id}')">✓</button>
+                <button class="acancel sm" onclick="cancelAdminEdit()">✕</button>
+              ` : `
+                <span class="acatname">${esc(c.name)}</span>
+                <div class="acatbtns">
+                  <button class="acatbtn" onclick="startEditCat('${c.id}')">editar</button>
+                  ${adminCats.length > 2 ? `<button class="acatbtn del" onclick="deleteCat('${c.id}')">eliminar</button>` : ''}
+                </div>
+              `}
+            </div>`).join('')}
+        </div>
+        <button class="aaddcat" onclick="addCat()">+ Agregar categoría</button>
+      </div>
+
+      <div class="asec">
+        <div class="aseclabel">Estadísticas</div>
+        <span class="astat">${count} compromiso${count !== 1 ? 's' : ''} registrado${count !== 1 ? 's' : ''}</span>
+      </div>
+
+      <div class="asec aactions">
+        <a href="${screenUrl}" target="_blank" class="aactionbtn primary">Abrir pantalla →</a>
+        <button class="aactionbtn secondary" onclick="copyFormLink('${formUrl}', this)">Copiar link del formulario</button>
+        <button class="aactionbtn danger" onclick="resetSessionCommitments('${s.id}')">Limpiar compromisos</button>
+      </div>
+
+    </div>`;
+
+  if (adminEditField === 'name')     setTimeout(() => { const i = document.getElementById('anamei');  i?.focus(); i?.select(); }, 30);
+  if (adminEditField === 'question') setTimeout(() => document.getElementById('aquesti')?.focus(), 30);
+  if (adminEditCatId)                setTimeout(() => { const i = document.getElementById(`acati_${adminEditCatId}`); i?.focus(); i?.select(); }, 30);
+}
+
+function startAdminEdit(field) {
+  adminEditField = field;
+  adminEditCatId = null;
+  renderAdminMain();
+}
+
+function cancelAdminEdit() {
+  adminEditField = null;
+  adminEditCatId = null;
+  renderAdminMain();
+}
+
+async function createSession() {
+  const input = document.getElementById('anewi');
+  const name  = input?.value.trim();
+  if (!name) { input?.focus(); return; }
+
+  const btn = document.getElementById('anewb');
+  btn.disabled = true;
+
+  const { data: session } = await sb.from('sessions').insert({
+    name,
+    question: '¿A qué te comprometes para ganar como equipo?'
+  }).select().single();
+
+  if (session) {
+    await sb.from('session_categories').insert([
+      { session_id: session.id, name: 'Categoría 1', order_index: 0 },
+      { session_id: session.id, name: 'Categoría 2', order_index: 1 },
+    ]);
+    input.value = '';
+    adminSessions.unshift(session);
+    adminCounts[session.id] = 0;
+    renderAdminSidebar();
+    await selectSession(session.id);
+  }
+
+  btn.disabled = false;
+}
+
+async function saveSessionName() {
+  const name = document.getElementById('anamei')?.value.trim();
+  if (!name || !adminSelected) return;
+
+  const { data } = await sb.from('sessions').update({ name }).eq('id', adminSelected.id).select().single();
+  if (data) {
+    adminSelected = data;
+    adminSessions = adminSessions.map(s => s.id === data.id ? data : s);
+    adminEditField = null;
+    renderAdminSidebar();
+    renderAdminMain();
+  }
+}
+
+async function saveSessionQuestion() {
+  const question = document.getElementById('aquesti')?.value.trim();
+  if (!question || !adminSelected) return;
+
+  const { data } = await sb.from('sessions').update({ question }).eq('id', adminSelected.id).select().single();
+  if (data) {
+    adminSelected = data;
+    adminSessions = adminSessions.map(s => s.id === data.id ? data : s);
+    adminEditField = null;
+    renderAdminMain();
+  }
+}
+
+function startEditCat(id) {
+  adminEditCatId = id;
+  adminEditField = null;
+  renderAdminMain();
+}
+
+async function saveCat(id) {
+  const name = document.getElementById(`acati_${id}`)?.value.trim();
+  if (!name) return;
+
+  const { data } = await sb.from('session_categories').update({ name }).eq('id', id).select().single();
+  if (data) {
+    adminCats     = adminCats.map(c => c.id === id ? data : c);
+    adminEditCatId = null;
+    renderAdminMain();
+  }
+}
+
+async function addCat() {
+  if (!adminSelected) return;
+  const maxOrder = adminCats.reduce((m, c) => Math.max(m, c.order_index), -1);
+
+  const { data } = await sb.from('session_categories').insert({
+    session_id:  adminSelected.id,
+    name:        `Categoría ${adminCats.length + 1}`,
+    order_index: maxOrder + 1
+  }).select().single();
+
+  if (data) {
+    adminCats.push(data);
+    adminEditCatId = data.id;
+    renderAdminMain();
+  }
+}
+
+async function deleteCat(id) {
+  if (adminCats.length <= 2) return;
+  await sb.from('session_categories').delete().eq('id', id);
+  adminCats = adminCats.filter(c => c.id !== id);
+  renderAdminMain();
+}
+
+async function resetSessionCommitments(id) {
+  if (!confirm('¿Limpiar todos los compromisos de esta sesión? Esta acción no se puede deshacer.')) return;
+  await sb.from('commitments').delete().eq('session_id', id);
+  adminCounts[id] = 0;
+  renderAdminSidebar();
+  renderAdminMain();
+}
+
+async function deleteSession(event, id) {
+  event.stopPropagation();
+  const s = adminSessions.find(s => s.id === id);
+  if (!confirm(`¿Eliminar la sesión "${s?.name || ''}" y todos sus compromisos?`)) return;
+
+  await sb.from('sessions').delete().eq('id', id);
+  adminSessions = adminSessions.filter(s => s.id !== id);
+  delete adminCounts[id];
+
+  if (adminSelected?.id === id) {
+    adminSelected = null;
+    adminCats     = [];
+    const main = document.getElementById('amain');
+    if (main) main.innerHTML = '<div id="aempty">Selecciona una sesión para editarla</div>';
+  }
+
+  renderAdminSidebar();
+}
+
+function copyFormLink(url, btn) {
+  navigator.clipboard?.writeText(url).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  }).catch(() => prompt('Copia este link:', url));
+}
+
+// ══════════════════════════════════════════════════════════════
+// FORMULARIO
+// ══════════════════════════════════════════════════════════════
+
+let formSelectedCatId = null;
 
 async function initForm() {
-  const { data: cats } = await sb.from('categories').select('*').order('id');
-  const categories = cats?.length ? cats : CATS.map(c=>({id:c.id, name:c.name}));
+  const { data: session } = await sb.from('sessions').select('*').eq('id', SESSION_ID).single();
+
+  if (!session) {
+    document.getElementById('root').innerHTML = `
+      <div id="fv"><div id="fc" style="text-align:center;padding:2rem">
+        <p style="color:#71717A">Sesión no encontrada.</p>
+      </div></div>`;
+    return;
+  }
+
+  const { data: cats } = await sb.from('session_categories')
+    .select('*').eq('session_id', SESSION_ID).order('order_index');
+  const categories = cats || [];
 
   document.getElementById('root').innerHTML = `
     <div id="fv"><div id="fc">
-      <h2 id="fq">${QUESTION}</h2>
-      <div id="ff">
+      <h2 id="fq">${esc(session.question)}</h2>
+      <div id="fff">
         <div class="fg">
           <label>Tu nombre</label>
           <input id="ni" type="text" placeholder="Ej: Camilo Restrepo" maxlength="60" autocomplete="off">
@@ -135,7 +520,7 @@ async function initForm() {
         <div class="fg">
           <label>Categoría</label>
           <div id="catsel">
-            ${categories.map(c=>`<div class="catopt" data-id="${c.id}" onclick="selectCat(${c.id})">${esc(c.name)}</div>`).join('')}
+            ${categories.map(c => `<div class="catopt" data-id="${c.id}" onclick="formSelectCat(this,'${c.id}')">${esc(c.name)}</div>`).join('')}
           </div>
         </div>
         <div class="fg">
@@ -143,67 +528,81 @@ async function initForm() {
           <textarea id="ri" rows="4" maxlength="150" placeholder="Escribe tu compromiso con el equipo..."></textarea>
           <span id="charcnt">0 / 150</span>
         </div>
-        <button id="sb" onclick="handleSubmit()">Enviar compromiso →</button>
+        <button id="fsbtn" onclick="handleSubmit()">Enviar compromiso →</button>
         <p id="ffoot">una experiencia laborativo.</p>
       </div>
-      <div id="success">
-        <div id="sicon">✓</div>
+      <div id="fsuccess">
+        <div id="fsicon">✓</div>
         <h3>¡Compromiso registrado!</h3>
         <p>Tu respuesta ya aparece en la pantalla del salón</p>
       </div>
     </div></div>`;
 
-  document.getElementById('ri').oninput = function(){
+  document.getElementById('ri').oninput = function() {
     document.getElementById('charcnt').textContent = `${this.value.length} / 150`;
   };
 }
 
-function selectCat(id) {
-  selectedCatId = id;
-  document.querySelectorAll('.catopt').forEach(el => {
-    el.classList.toggle('sel', parseInt(el.dataset.id) === id);
-  });
+function formSelectCat(el, id) {
+  formSelectedCatId = id;
+  document.querySelectorAll('.catopt').forEach(e => e.classList.toggle('sel', e === el));
 }
 
 async function handleSubmit() {
-  const name = document.getElementById('ni').value.trim();
-  const resp = document.getElementById('ri').value.trim();
-  if (!name)           { alert('Por favor escribe tu nombre'); return; }
-  if (!selectedCatId)  { alert('Por favor selecciona una categoría'); return; }
-  if (!resp)           { alert('Por favor escribe tu compromiso'); return; }
+  const name = document.getElementById('ni')?.value.trim();
+  const resp = document.getElementById('ri')?.value.trim();
+  if (!name)             { alert('Por favor escribe tu nombre'); return; }
+  if (!formSelectedCatId){ alert('Por favor selecciona una categoría'); return; }
+  if (!resp)             { alert('Por favor escribe tu compromiso'); return; }
 
-  const btn = document.getElementById('sb');
+  const btn = document.getElementById('fsbtn');
   btn.textContent = '⏳ Enviando...'; btn.disabled = true;
 
-  await sb.from('commitments').insert({ name, response: resp, category_id: selectedCatId });
+  await sb.from('commitments').insert({
+    name,
+    response:    resp,
+    category_id: formSelectedCatId,
+    session_id:  SESSION_ID
+  });
 
-  document.getElementById('ff').style.display = 'none';
-  document.getElementById('success').style.display = 'flex';
+  document.getElementById('fff').style.display   = 'none';
+  document.getElementById('fsuccess').style.display = 'flex';
 }
 
-// ══ PANTALLA PRESENTADOR ════════════════
-const seen = new Set();
-const CAT_NAMES_KEY = 'laborativo_cat_names';
+// ══════════════════════════════════════════════════════════════
+// PANTALLA / INTRO
+// ══════════════════════════════════════════════════════════════
 
-function loadCatName(id) {
-  try { return JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}')[id] || null; } catch{ return null; }
-}
-async function saveCatName(id, name) {
-  try {
-    const obj = JSON.parse(localStorage.getItem(CAT_NAMES_KEY)||'{}');
-    obj[id] = name;
-    localStorage.setItem(CAT_NAMES_KEY, JSON.stringify(obj));
-  } catch{}
-  await sb.from('categories').upsert({id, name});
-}
+const screenSeen = new Set();
+let screenSession = null;
+let screenCats    = [];
 
 async function initScreen() {
-  const formUrl = location.origin + location.pathname + '?view=form';
+  const { data: session } = await sb.from('sessions').select('*').eq('id', SESSION_ID).single();
 
-  // Vista de inicio
+  if (!session) {
+    document.getElementById('root').innerHTML = `
+      <div id="iv" style="position:relative">
+        <h1 id="iq" style="font-size:1.5rem">Sesión no encontrada.</h1>
+      </div>`;
+    return;
+  }
+
+  screenSession = session;
+
+  const { data: cats } = await sb.from('session_categories')
+    .select('*').eq('session_id', SESSION_ID).order('order_index');
+  screenCats = cats || [];
+
+  showIntroView();
+}
+
+function showIntroView() {
+  const formUrl = `${location.origin}${location.pathname}?view=form&session=${SESSION_ID}`;
+
   document.getElementById('root').innerHTML = `
-    <div id="iv" style="position:relative">
-      <h1 id="iq">${QUESTION}</h1>
+    <div id="iv">
+      <h1 id="iq">${esc(screenSession.question)}</h1>
       <div id="iqrwrap"></div>
       <p id="iqlabel">Escanea para participar</p>
       <button id="ienter" onclick="showCommitmentsView()">Ver compromisos →</button>
@@ -211,13 +610,14 @@ async function initScreen() {
     </div>`;
 
   new QRCode(document.getElementById('iqrwrap'), {
-    text: formUrl, width:280, height:280,
-    colorDark:'#4CAF50', colorLight:'#ffffff'
+    text: formUrl, width: 280, height: 280,
+    colorDark: '#4CAF50', colorLight: '#ffffff'
   });
 }
 
 async function showCommitmentsView() {
-  const formUrl = location.origin + location.pathname + '?view=form';
+  const formUrl = `${location.origin}${location.pathname}?view=form&session=${SESSION_ID}`;
+
   document.getElementById('root').innerHTML = `
     <div id="sv">
       <header id="sh">
@@ -225,98 +625,98 @@ async function showCommitmentsView() {
           <span id="slogo2">una experiencia laborativo.</span>
           <div id="spc"><span id="spn">0</span><span id="spl">participantes</span></div>
         </div>
-        <h1 id="sq">${QUESTION}</h1>
+        <h1 id="sq">${esc(screenSession.question)}</h1>
         <div id="sqrbox">
           <div id="qrwrap"></div>
           <p id="qrlabel">Escanea para participar</p>
         </div>
       </header>
       <div id="sgrid">
-        ${CATS.map(c=>`
-          <div class="cs" style="--cc:${c.color}">
-            <div class="ch"><span class="cn" id="cn${c.id}" contenteditable="true" spellcheck="false" data-id="${c.id}">${loadCatName(c.id)||c.name}</span><div class="ch-right"><span class="ck" id="ck${c.id}">0</span><span class="cklabel">compromisos</span></div></div>
+        ${screenCats.map(c => `
+          <div class="cs">
+            <div class="ch">
+              <span class="cn" id="cn${c.id}">${esc(c.name)}</span>
+              <div class="ch-right">
+                <span class="ck" id="ck${c.id}">0</span>
+                <span class="cklabel">compromisos</span>
+              </div>
+            </div>
             <div class="cl" id="cl${c.id}"><p class="empty">—</p></div>
           </div>`).join('')}
       </div>
       <div id="rbar">
-        <button id="bbtn" onclick="initScreen()">← Volver al código QR</button>
+        <button id="bbtn" onclick="showIntroView()">← Volver al código QR</button>
         <div style="display:flex;gap:.5rem">
           <button id="pbtn" onclick="exportPDF()">Exportar PDF</button>
-          <button id="rbtn" onclick="resetAll()">Limpiar respuestas</button>
+          <button id="rbtn" onclick="resetAllCommitments()">Limpiar respuestas</button>
         </div>
       </div>
     </div>`;
 
-  // Guardar nombres al editar
-  CATS.forEach(c => {
-    const el = document.getElementById(`cn${c.id}`);
-    el.addEventListener('blur', () => saveCatName(c.id, el.textContent.trim()));
-    el.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); el.blur(); } });
-  });
-
   new QRCode(document.getElementById('qrwrap'), {
-    text: formUrl, width:90, height:90,
-    colorDark:'#fff', colorLight:'#4CAF50'
+    text: formUrl, width: 90, height: 90,
+    colorDark: '#fff', colorLight: '#4CAF50'
   });
 
-  // Carga inicial
-  const { data } = await sb.from('commitments').select('*').order('created_at', {ascending:true});
-  (data||[]).forEach(r => addCard(r));
+  const { data } = await sb.from('commitments')
+    .select('*').eq('session_id', SESSION_ID).order('created_at', { ascending: true });
+  (data || []).forEach(r => addCard(r));
   updateCount(data?.length || 0);
 
-  // Tiempo real
-  sb.channel('commitments')
-    .on('postgres_changes', {event:'INSERT', schema:'public', table:'commitments'}, p => {
-      addCard(p.new);
-    })
+  sb.channel(`commitments_${SESSION_ID}`)
+    .on('postgres_changes', {
+      event: 'INSERT', schema: 'public', table: 'commitments',
+      filter: `session_id=eq.${SESSION_ID}`
+    }, p => addCard(p.new))
     .subscribe();
 }
 
 function addCard(r) {
-  if (seen.has(r.id)) return;
-  seen.add(r.id);
-  const cat = CATS.find(c=>c.id===r.category_id)||CATS[0];
+  if (screenSeen.has(r.id)) return;
+  screenSeen.add(r.id);
+  const cat  = screenCats.find(c => c.id === r.category_id) || screenCats[0];
+  if (!cat) return;
   const list = document.getElementById(`cl${r.category_id}`);
   if (!list) return;
   list.querySelector('.empty')?.remove();
   const el = document.createElement('div');
   el.className = 'card enter';
-  el.style.setProperty('--cc', cat.color);
   el.innerHTML = `<p class="cr">${esc(r.response)}</p><p class="cname">${esc(r.name)}</p>`;
   list.prepend(el);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.remove('enter')));
+  requestAnimationFrame(() => requestAnimationFrame(() => el.classList.remove('enter')));
   const cnt = document.getElementById(`ck${r.category_id}`);
-  cnt.textContent = parseInt(cnt.textContent||0)+1;
-  updateCount(seen.size);
+  if (cnt) cnt.textContent = parseInt(cnt.textContent || 0) + 1;
+  updateCount(screenSeen.size);
 }
 
-function updateCount(n) { document.getElementById('spn').textContent = n; }
+function updateCount(n) {
+  const el = document.getElementById('spn');
+  if (el) el.textContent = n;
+}
 
-async function resetAll() {
-  if (!confirm('¿Limpiar todas las respuestas? Esta acción no se puede deshacer.')) return;
-  await sb.from('commitments').delete().neq('id','00000000-0000-0000-0000-000000000000');
-  seen.clear();
-  CATS.forEach(c=>{
+async function resetAllCommitments() {
+  if (!confirm('¿Limpiar todas las respuestas de esta sesión? Esta acción no se puede deshacer.')) return;
+  await sb.from('commitments').delete().eq('session_id', SESSION_ID);
+  screenSeen.clear();
+  screenCats.forEach(c => {
     const list = document.getElementById(`cl${c.id}`);
-    list.innerHTML='<p class="empty">—</p>';
-    document.getElementById(`ck${c.id}`).textContent='0';
+    if (list) list.innerHTML = '<p class="empty">—</p>';
+    const cnt  = document.getElementById(`ck${c.id}`);
+    if (cnt)  cnt.textContent = '0';
   });
   updateCount(0);
 }
 
 async function exportPDF() {
-  const { data } = await sb.from('commitments').select('*').order('created_at', {ascending:true});
-  const { data: cats } = await sb.from('categories').select('*').order('id');
-  const categories = cats?.length ? cats : CATS.map(c=>({id:c.id, name:c.name}));
+  const { data } = await sb.from('commitments')
+    .select('*').eq('session_id', SESSION_ID).order('created_at', { ascending: true });
 
-  const date = new Date().toLocaleDateString('es-CO',{year:'numeric',month:'long',day:'numeric'});
-  let html = `<div class="ph"><h1>Todos a la cancha.</h1><p>${date}</p></div>`;
+  const date = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+  let html = `<div class="ph"><h1>${esc(screenSession.question)}</h1><p>${date}</p></div>`;
 
-  categories.forEach(cat => {
-    const domEl = document.getElementById(`cn${cat.id}`);
-    const name = domEl ? domEl.textContent.trim() : cat.name;
-    const items = (data||[]).filter(r => r.category_id === cat.id);
-    html += `<div class="pcat"><h2>${esc(name)}</h2><span>${items.length} compromisos</span></div>`;
+  screenCats.forEach(cat => {
+    const items = (data || []).filter(r => r.category_id === cat.id);
+    html += `<div class="pcat"><h2>${esc(cat.name)}</h2><span>${items.length} compromisos</span></div>`;
     items.forEach(r => {
       html += `<div class="pcard"><p class="pcr">${esc(r.response)}</p><p class="pcname">${esc(r.name)}</p></div>`;
     });
@@ -326,7 +726,9 @@ async function exportPDF() {
   window.print();
 }
 
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
 </script>
 </body>
 </html>
