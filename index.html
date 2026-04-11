@@ -55,7 +55,7 @@
     #sv{height:100vh;display:flex;flex-direction:column;overflow:hidden}
     #sh{display:flex;align-items:center;gap:1rem;padding:.75rem 2rem;background:var(--c);flex-shrink:0;position:relative}
     #sleft{display:flex;flex-direction:column;gap:.3rem;min-width:130px}
-    #slogo2{position:absolute;left:50%;transform:translateX(-50%);top:.55rem;font-size:.72rem;color:rgba(255,255,255,.55);font-weight:500;letter-spacing:.04em;white-space:nowrap;pointer-events:none}
+    #slogo2{position:absolute;left:50%;transform:translateX(-50%);top:.55rem;font-size:.82rem;color:#fff;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
     #spc{display:flex;flex-direction:row;align-items:baseline;gap:.4rem}
     #spn{font-size:4.5rem;font-weight:800;color:#fff;line-height:1}
     #spl{font-size:1rem;color:#fff}
@@ -751,7 +751,7 @@ async function showCommitmentsView() {
     <div id="sv">
       <header id="sh">
         <div id="sleft">
-          <span id="slogo2">una experiencia laborativo.</span>
+          <span id="slogo2">una experiencia laborativo</span>
           <div id="spc"><span id="spn">0</span><span id="spl">participantes</span></div>
         </div>
         <h1 id="sq">${esc(screenSession.question)}</h1>
